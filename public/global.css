@@ -65,6 +65,12 @@ button:focus {
 	border-color: #666;
 }
 
+.behavior-statements {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-gap: 1.25em;
+	text-align: left;
+}
 
 .warning {
 	color: hsl(350deg, 70%, 30%);

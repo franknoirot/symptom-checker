@@ -7,7 +7,7 @@
 </script>
 
 <label style='--pct: {valPct};'>
-    <input type='range' min={min} max={max} bind:value={value} step='1' />
+    <input type='range' min={min} max={max} value={value} step='1' on:input />
     <div>
         {#each values as val, i (i)}
         <span>{val}</span>

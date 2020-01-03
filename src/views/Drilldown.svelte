@@ -3,26 +3,32 @@
     import { currStep, questions, relation, relationValues, verbs } from '../stores.js'
 
     $: checkedQuestions = $questions.filter(q => q.checked)
+    $: checkedIndices = $questions.map((q,i) => q.checked ? i : -1).filter(id => id >= 0)
     $: currQ = checkedQuestions[$currStep]
-    $: console.log('filtered subquestions', currQ.subquestions.filter(q => q.checked).map(q => q.level))
 
     function moveStep(n) {
         $currStep = $currStep + n
     }
 </script>
 
-<h2>{ currQ.question(relationValues[$relation].default, currQ.verbs.map(v => verbs[v][relationValues[$relation].verb])) }</h2>
-{#each currQ.subquestions as q, i (i)}
-<Question question={q.question(relationValues[$relation].default, q.verbs.map(v => verbs[v][relationValues[$relation].verb]))}
-    bind:checked={q.checked} bind:level={q.level}/>
-{/each}
+    <h2>{ currQ.question(relationValues[$relation].default, currQ.verbs.map(v => verbs[v][relationValues[$relation].verb])) }</h2>
+<div class='behavior-statements'>
+    {#each currQ.subquestions as q, i (i)}
+    <Question question={q.question(relationValues[$relation].default, q.verbs.map(v => verbs[v][relationValues[$relation].verb]))}
+        checked={q.checked} level={q.level} qIndex={[checkedIndices[$currStep], i]} />
+    {/each}
+</div>
 <div class='question-btns'>
     {#if $currStep > 0}
     <button on:click={() => moveStep(-1)}>Previous Question</button>
+    {:else}
+    <span></span>
     {/if}
     {#if $currStep < checkedQuestions.length - 1}
     <button on:click={() => moveStep(1)}>Next Question</button>
-{/if}
+    {:else}
+    <span></span>
+    {/if}
 </div>
 
 <style>

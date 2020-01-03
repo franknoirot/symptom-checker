@@ -1,16 +1,41 @@
 <script>
     import Slider from './Slider.svelte'
-    import { levelValues } from '../stores.js'
+    import { levelValues, questions } from '../stores.js'
     export let checked = false
     export let question = "What is a default question?"
     export let level = 0
+    export let qIndex = []
+
+    function arrDive(arr, indexArr) {
+        if (indexArr.length < 1 || arr.length === 0) return arr
+        if (indexArr.length <= 1) return arr[indexArr[0]]
+        
+        let val = arr[indexArr[0]].subquestions
+        let i = indexArr.slice(1, indexArr.length)
+        return arrDive(val, i)
+    }
+
+    function onCheckboxToggle(e) {
+        questions.update(qs => {
+            const newQs = [...qs]
+            arrDive(newQs, qIndex).checked = e.target.checked
+            return newQs
+        })
+    }
+    function onSliderInput(e) {
+        questions.update(qs => {
+            const newQs = [...qs]
+            arrDive(newQs, qIndex).level = e.target.value
+            return newQs
+        })
+    }
 </script>
 
 <label class='behavior'>
-    <input type="checkbox" bind:checked={checked}>
+    <input type="checkbox" checked={checked} on:input={onCheckboxToggle}>
     {question}
     {#if checked}
-    <Slider values={levelValues} bind:value={level} />
+    <Slider values={levelValues} value={level} on:input={onSliderInput} />
     {/if}
 </label>
 
