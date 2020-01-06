@@ -8,7 +8,7 @@
 		$currSection = sectionValues[sectionValues.indexOf($currSection) + step]
 	}
 
-	$: questionChecked = !$questions.filter(q => q.checked).length > 0
+	$: questionChecked = $questions.filter(q => q.checked).length > 0
 </script>
 
 <main>
@@ -25,7 +25,7 @@
 		<span></span>
 		{/if}
 		{#if sectionValues.indexOf($currSection) < sectionValues.length-1}
-		<button on:click={() => changeSection(1)} class='next' disabled={questionChecked || ($age == 0 && $relation == 3)}>
+		<button on:click={() => changeSection(1)} class='next' disabled={!questionChecked || ($age == 0 && $relation == 0)}>
 			Next Section
 		</button>
 		{:else}

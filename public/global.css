@@ -78,6 +78,7 @@ button:focus {
 	border: solid 1px hsl(350deg, 70%, 30%);
 	box-sizing: border-box;
 	border-radius: .5em;
+	margin-top: 1em;
 	padding: 1em 2em;
 	opacity: 0;
 	transform: translateY(.5em);

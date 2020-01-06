@@ -20,18 +20,45 @@
         --primary: hsl(190deg, 60%, 70%);
         position: relative;
         max-width: 60vw;
-        display: block;
-        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1em 0;
+        width: calc(100% - 2em);
+    }
+    label::before {
+        content: '';
+        position: absolute;
+        top: calc(.5em - 1px);
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: hsl(190deg, 20%, 10%);
+    }
+
+    label::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: var(--pct);
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        background: dodgerblue;
+        transform: translate(-50%);
     }
 
     input {
         width: calc(100% - 1em);
         margin: auto;
+        opacity: 0;
     }
 
     div {
         display: flex;
         justify-content: space-between;
+        width: calc(100% + 1.5em);
+        margin-top: .5em;
     }
 
     span {

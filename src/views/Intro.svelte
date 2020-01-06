@@ -12,8 +12,14 @@
 <section>
 	<h2>{relationValues[$relation].possessive} age is:</h2>
 	<Slider values={ageValues} value={$age} on:input={e => $age = e.target.value} />
-	{#if ($age < 1 && $relation === 3)}
-	<p class='warning'>This tool is intended for use by people 18 or older. Please talk to a guardian or loved one or call one of these services if you are in distress.</p>
+	{#if ($age < 1 && $relation === 0)}
+	<div class='warning'>
+		<p>This tool is intended for use by people 18 or older. Please talk to a guardian
+		or loved one or call one of these services if you are in distress:</p>
+		<ul>
+			<li><strong>Suicide Help Line:</strong> 1-800-622-HELP</li>
+		</ul>
+	</div>
 	{/if}
 </section>
 <section>

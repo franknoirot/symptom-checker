@@ -210,11 +210,11 @@ export const verbs = {
 export const sectionValues = ['intro', 'behaviors', 'results']
 export const relationValues = [
     {
-        value: "My child",
-        default: "My child",
-        possessive: "My child's",
-        identifies: "My child indentifies",
-        verb: "third",
+        value: "Myself",
+        default: "I",
+        possessive: "My",
+        identifies: 'I identify',
+        verb: "firstSingular",
     },
     {
         value: "My loved one",
@@ -229,13 +229,6 @@ export const relationValues = [
         possessive: "My friend's",
         identifies: "My friend identifies",
         verb: "third",
-    },
-    {
-        value: "Myself",
-        default: "I",
-        possessive: "My",
-        identifies: 'I identify',
-        verb: "firstSingular",
     },
     {
         value: "My student",
