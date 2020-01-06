@@ -1,32 +1,39 @@
 <script>
     export let values = [1,2,3,4,5]
+    export let name = 'default'
     let min = 0
     $: max = values.length-1
     export let value = values[min]
     $: valPct = (value / (values.length-1)) * 100 + '%'
 </script>
 
-<label style='--pct: {valPct};'>
-    <input type='range' min={min} max={max} value={value} step='1' on:input />
-    <div>
+<div class='wrapper' style='--pct: {valPct};'>
+    <input type='range' min={min} max={max} value={value} step='1' on:input name={'slider_'+name} />
+    <div class='styled_input'></div>
+    <label for={'slider_'+name} >
         {#each values as val, i (i)}
         <span>{val}</span>
         {/each}
-    </div>
-</label>
+    </label>
+</div>
 
 <style>
-    label {
-        --primary: hsl(190deg, 60%, 70%);
+    .wrapper {
+        --primary_hsl: 190deg, 85%, 60%;
         position: relative;
         max-width: 60vw;
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 1em 0;
-        width: calc(100% - 2em);
+        width: calc(100% - 1.75em);
     }
-    label::before {
+    .styled_input {
+        width: 100%;
+        height: 1em;
+        pointer-events: none;
+    }
+    .styled_input::before {
         content: '';
         position: absolute;
         top: calc(.5em - 1px);
@@ -36,7 +43,11 @@
         background: hsl(190deg, 20%, 10%);
     }
 
-    label::after {
+    input:focus + .styled_input::after {
+        border: solid 2px;
+    }
+
+    .styled_input::after {
         content: '';
         position: absolute;
         top: 0;
@@ -44,17 +55,21 @@
         width: 1em;
         height: 1em;
         border-radius: 50%;
-        background: dodgerblue;
+        background: hsl(var(--primary_hsl));
         transform: translate(-50%);
+        transition: all .09s ease-in-out;
     }
 
     input {
+        height: 2em;
         width: calc(100% - 1em);
         margin: auto;
         opacity: 0;
+        position: absolute;
+        transform: translateY(-50%);
     }
 
-    div {
+    label {
         display: flex;
         justify-content: space-between;
         width: calc(100% + 1.5em);

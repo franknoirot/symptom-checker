@@ -1,4 +1,5 @@
 <script>
+    import RollingToggle from './RollingToggle.svelte'
     import Slider from './Slider.svelte'
     import { levelValues, questions } from '../stores.js'
     export let checked = false
@@ -32,15 +33,29 @@
 </script>
 
 <label class='behavior'>
-    <input type="checkbox" checked={checked} on:input={onCheckboxToggle}>
-    {question}
+    <div>
+        <RollingToggle type="checkbox" checked={checked} on:input={onCheckboxToggle} />
+        <p>{question}</p>
+    </div>
     {#if checked}
-    <Slider values={levelValues} value={level} on:input={onSliderInput} />
+    <Slider values={levelValues} value={level} on:input={onSliderInput} name={question + ' level'} />
     {/if}
 </label>
 
 <style>
     label {
         margin: 1em 0;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+
+    p {
+        display: inline-block;
+        width: fit-content;
+        margin: 0;
+        margin-left: .5em;
     }
 </style>

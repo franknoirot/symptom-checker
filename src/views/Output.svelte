@@ -86,6 +86,10 @@
 		border: solid lightgray 1px;
 	}
 
+	.question.active:not(.subquestion) td {
+		border-color: #666;
+	}
+
 	.subquestion.active {
 		background: hsl(190deg, 5%, 97%);
 		box-shadow: none;
