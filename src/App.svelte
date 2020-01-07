@@ -32,8 +32,8 @@
 		<span></span>
 		{/if}
 	</div>
-	<Output />
 </main>
+<Output />
 
 <style>
 	main {
@@ -53,8 +53,28 @@
 		display: flex;
 		justify-content: space-between;
 	}
-	.section-btns .next {
-		justify-self: flex-end;
+	
+	button {
+		border: solid 1px;
+		background: transparent;
+		font-size: 90%;
+		font-weight: bold;
+		color: black;
+	}
+
+	button:disabled {
+		color: gray;
+		border-color: transparent;
+	}
+
+	.next::after {
+		content: '→';
+		margin-left: .5em;
+	}
+	
+	.prev::before {
+		content: '←';
+		margin-right: .5em;
 	}
 
 	h1 {
@@ -63,6 +83,8 @@
 		font-size: 4em;
 		font-weight: 100;
 	}
+
+	
 
 	@media (min-width: 640px) {
 		main {

@@ -20,12 +20,12 @@
 </div>
 <div class='question-btns'>
     {#if $currStep > 0}
-    <button on:click={() => moveStep(-1)}>Previous Question</button>
+    <button on:click={() => moveStep(-1)} class='prev'>Previous Question</button>
     {:else}
     <span></span>
     {/if}
     {#if $currStep < checkedQuestions.length - 1}
-    <button on:click={() => moveStep(1)}>Next Question</button>
+    <button on:click={() => moveStep(1)} class='next'>Next Question</button>
     {:else}
     <span></span>
     {/if}
@@ -33,12 +33,31 @@
 
 <style>
     .question-btns {
-        margin: 1.5em 0;
+        width: 50%;
+        margin: 1.5em auto;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         border: none;
     }
-    .question-btns button {
-        margin: 0 2em;
+    button {
+        border: 0;
+        background: transparent;
+        padding-bottom: .25em;
+        border-bottom: solid hsl(var(--primary_hsl));    
+    }
+
+    .prev {
+        color: hsl(190deg, 10%, 50%);
+        border-bottom-color: inherit;
+    }
+
+    .prev::before {
+        content: '←';
+        margin-right: 1em;
+    }
+
+    .next::after {
+        content: '→';
+        margin-left: 1em;
     }
 </style>
