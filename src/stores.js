@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, derived } from 'svelte/store'
 
 export const currSection = writable('intro')
 export const currStep = writable(0)
@@ -12,6 +12,12 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [
+            {disorder: 'bipolar', weight: 0.4},
+            {disorder: 'borderline', weight: 0.6},
+            {disorder: 'depression', weight: 0.3},
+            {disorder: 'anxiety', weight: 0.4},
+        ],
         subquestions: [
             {
                 question: (subj, verbs) => `${verbs[0]} uncooperative, stubborn, or doesn't follow rules.`,
@@ -49,6 +55,12 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [
+            {disorder: 'bipolar', weight: 0.5},
+            {disorder: 'borderline', weight: 0.1},
+            {disorder: 'depression', weight: 0.4},
+            {disorder: 'anxiety', weight: 0.4},
+        ],
         subquestions: [],
     },
     {
@@ -57,6 +69,7 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [],
         subquestions: [],
     },
     {
@@ -65,6 +78,12 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [
+            {disorder: 'bipolar', weight: 0.7},
+            {disorder: 'borderline', weight: 0.6},
+            {disorder: 'depression', weight: 0.1},
+            {disorder: 'anxiety', weight: 0.2},
+        ],
         subquestions: [
             {
                 question: (subj, verbs) => `Blurt out words or interrupts more than other people.`,
@@ -95,6 +114,12 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [
+            {disorder: 'bipolar', weight: 0.3},
+            {disorder: 'borderline', weight: 0.3},
+            {disorder: 'depression', weight: 0.4},
+            {disorder: 'anxiety', weight: 0.5},
+        ],
         subquestions: [],
     },
     {
@@ -103,6 +128,12 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [
+            {disorder: 'bipolar', weight: 0.6},
+            {disorder: 'borderline', weight: 0.1},
+            {disorder: 'depression', weight: 0.2},
+            {disorder: 'anxiety', weight: 0.6},
+        ],
         subquestions: [
             {
                 question: (subj, verbs) => `Has habits or rituals they need to repeat over and over`,
@@ -147,6 +178,7 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [],
         subquestions: [],
     },
     {
@@ -155,6 +187,7 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [],
         subquestions: [],
     },
     {
@@ -163,6 +196,7 @@ export const questions = writable([
         checked: false,
         level: 0,
         levelMax: 2,
+        markers: [],
         subquestions: [],
     },
 ])
@@ -249,3 +283,21 @@ export const relationValues = [
 export const ageValues = ['<17', 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, '28+']
 export const genderValues = ['Female', 'Male', 'Non-Binary', 'Trans']
 export const levelValues = ['Mild', 'Moderate', 'Severe']
+export const disorders = [
+    {
+        name: 'bipolar',
+        label: 'Bipolar Disorder (BPD)',
+    }, 
+    {
+        name: 'borderline',
+        label: 'Borderline Disorder',
+    }, 
+    {
+        name: 'depression',
+        label: 'Depressive Disorder',
+    }, 
+    {
+        name: 'anxiety',
+        label: 'General Anxiety Disorder',
+    },
+]

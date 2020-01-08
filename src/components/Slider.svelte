@@ -25,12 +25,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 1em 0;
+        margin: 1.5em 0 0 0;
         width: calc(100% - 1.75em);
     }
     .styled_input {
         width: 100%;
         height: 1em;
+        top: 0;
+        transform: translateY(-50%);
         pointer-events: none;
     }
     .styled_input::before {
@@ -56,13 +58,14 @@
         height: 1em;
         border-radius: 50%;
         background: hsl(var(--primary_hsl));
-        transform: translate(-50%);
+        transform: translate(-50%, -2px);
         transition: all .09s ease-in-out;
     }
 
     input {
         height: 2em;
-        width: calc(100% - 1em);
+        width: 100%;
+        padding: 0;
         margin: auto;
         opacity: 0;
         position: absolute;

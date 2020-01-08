@@ -2,6 +2,7 @@
 	import Intro from './views/Intro.svelte'
 	import Drilldown from './views/Drilldown.svelte'
 	import Output from './views/Output.svelte'
+	import Results from './views/Results.svelte'
 	import { currSection, sectionValues, questions, age, relation } from './stores.js'
 
 	function changeSection(step) {
@@ -17,6 +18,8 @@
 	<Intro />
 	{:else if ($currSection === 'behaviors')}
 	<Drilldown />
+	{:else if ($currSection === 'results')}
+	<Results />
 	{/if}
 	<div class='section-btns'>
 		{#if sectionValues.indexOf($currSection) > 0}
@@ -78,7 +81,7 @@
 	}
 
 	h1 {
-		color: #ff3e00;
+		color: hsl(var(--primary_hsl));
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;

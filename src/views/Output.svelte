@@ -1,5 +1,27 @@
 <script>
-    import {relation, relationValues, age, ageValues, gender, genderValues, questions, levelValues, verbs} from '../stores.js'
+	import {relation, relationValues, age, ageValues, gender, genderValues, questions, levelValues, verbs, disorders } from '../stores.js'
+	
+	$: estimatedDisorders = disorders.map(d => {
+		return {
+			...d,
+			level: $questions.reduce((acc, q) => {
+				const marker = q.markers.find(m => m.disorder === d.name)
+				if (marker && q.checked) {
+					const subScore = q.subquestions.length > 0
+									? q.subquestions.reduce((subAcc, subQ) => { 
+										return (subQ.checked )
+											? subAcc + (1 + parseInt(subQ.level)) / parseInt(subQ.levelMax + 1)
+											: subAcc + 0
+									  }, 0) / q.subquestions.length / marker.weight
+									: 0
+					const score = (1 + parseInt(q.level) + subScore) * marker.weight
+
+					return acc + score
+				}
+				return acc + 0
+			}, 0)
+		}
+	})
 </script>
 
 <section>
@@ -49,6 +71,18 @@
 			{/if}
 			{/each}
 		</tbody>
+	</table>
+	<table>
+		<tr>
+			<th>Disorder</th>
+			<th>Score</th>
+		</tr>
+		{#each estimatedDisorders as disorder, k ('disorder-res_'+k)}
+		<tr>
+			<td>{ disorder.label }</td>
+			<td>{ disorder.level.toFixed(2) }</td>
+		</tr>
+		{/each}
 	</table>
 </section>
 
